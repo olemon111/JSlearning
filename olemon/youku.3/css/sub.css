@@ -1,0 +1,28 @@
+.common-container{
+  position: relative;
+  top:130px;
+  left: 120px;
+}
+
+.sub-title{
+  font-size: 15px;
+  font-weight: normal;
+}
+.sub-title>a{
+  color: black;
+}
+.change{
+  position: relative;
+  left: 830px;
+  font-weight: normal;
+  font-size: 15px;
+  color: black;
+  right: 50px;
+}
+.change>img{
+  width: 16px;
+  padding: 0;
+}
+.change:hover{
+  color: #0099ff;
+}

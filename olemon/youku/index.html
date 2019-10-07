@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="renderer" content="webkit"/>
+  <meta name="title" content="优酷 - 这世界很酷"/>
+  <link rel="stylesheet" href="css/main.css" type="text/css">
+  <link rel="stylesheet" href="css/sub.css" type="text/css">
+  <link rel="stylesheet" href="css/lunbo.css" type="text/css">
+  <link rel="stylesheet" href="css/back.css" type="text/css">
+  <script type="text/javascript" src="js/backtotop.js" ></script>
+  <style>
+
+ ul {
+    list-style-type: none;
+  }
+  .box {
+    position: relative;
+    width: 1350px;
+    height: 410px;
+    top: 320px;
+    margin: 140px 120px 0 100px;
+    overflow: hidden;
+  }
+  .box1 {
+    position: relative;
+    width: 1350px;
+    height: 410px;
+    top: 320px;
+    margin: 140px 120px 0 100px;
+    overflow: hidden;
+  }
+  .hd {
+    height: 45px;
+
+  }
+  .hd span {
+    display: inline-block;
+    width: 50px;
+    color: rgba(0,0,0,.65);
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .bd li {
+    height: 330px;
+    display: none;
+  }
+  .bd li.current {
+    display: block;
+    font-size: 36px;
+  }
+  .movierebo img{
+    width: 213px;
+    height: 320px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="top">
+    <img src="img/national.png" class="national">
+  </div>
+    <p id="back-top" style="display:block;">
+      <div class="fixedbar"><a href=""><img src="img/客服.png" style="width:20px;margin-left:10px;"alt=""></a><a href="javascript:;" id="btn" title="回到顶部"><img src="img/上.png" alt="" style="width:30px;margin-left: 5px;display:block;"></a></div>
+    </p>
+    <div class="wrap">
+      <div class="img-wrap">
+        <ul class="item-list">
+          <div style="height:50px;"></div>
+        </ul>
+      </div>
+    </div>
+  <script type="text/javascript">
+      let items = [
+      {
+        title: '壮丽70年',
+        desc: '最美中国色',
+        url: 'img/img1.jpg'
+      },
+      {
+        title: '深夜食堂',
+        desc: '走进食堂的秘密',
+        url: 'img/img2.jpg'
+      },
+      {
+        title: '烈火英雄',
+        desc: '黄晓明化身消防员！',
+        url: 'img/img3.jpg'
+      },
+      {
+        title: '在远方',
+        desc: '保剑峰化身醋王',
+        url: 'img/img4.jpg'
+      },
+      {
+        title: '这就是灌篮',
+        desc: '孙悦执教遇难题',
+        url: 'img/img5.jpg'
+      },
+      {
+        title: '灌篮2',
+        desc: '头盔哥单打独斗',
+        url: 'img/img6.jpg'
+      },
+      {
+        title: '头号行动派',
+        desc: '陈意涵自虐式黑科技',
+        url: 'img/img7.jpg'
+      },
+  ];
+  let curIndex = 0;
+  let isAutoMove = true;
+  let interval = 3000;
+  function createTag(tag) {
+    return document.createElement(tag);
+  }
+  function createText(text) {
+    return document.createTextNode(text);
+  }
+  function initItemList() {
+    let ul = document.getElementsByClassName('item-list')[0];
+
+    for (let i = 0; i < items.length; i++) {
+      let li = createTag('li');
+      if (i == 0) { li.classList.add('active') }
+      let span1 = createTag('span');
+      let span2 = createTag('span');
+      let span3 = createTag('span');
+      let text1 = createText(items[i].title);
+      let text2 = createText('：');
+      let text3 = createText(items[i].desc);
+      span1.appendChild(text1);
+      span2.appendChild(text2);
+      span3.appendChild(text3);
+      li.appendChild(span1);
+      li.appendChild(span2);
+      li.appendChild(span3);
+      ul.appendChild(li);
+      addHoverListener(li, i);
+    }
+  }
+  function addHoverListener(trigger, index) {
+    trigger.addEventListener('mouseenter', function () {
+      curIndex = index;  // 保存当前索引
+      changeImage();
+      activeText();
+    });
+  }
+  function changeImage() {
+    console.log('curIndex: ', curIndex);
+    let imgUrl = items[curIndex].url;
+    let imgWrap = document.getElementsByClassName('img-wrap')[0];
+    imgWrap.style.cssText = "background-image: url('" + imgUrl + "')";
+  }
+  function activeText() {
+    let activeObj = document.getElementsByClassName('active')[0];
+    let li = document.getElementsByTagName('li')[curIndex];
+    if (activeObj) {
+      activeObj.classList.remove('active');
+    }
+    li.classList.add('active');
+  }
+  function addEnterListener() {
+    let wrap = document.getElementsByClassName('wrap')[0];
+    wrap.addEventListener('mouseenter', function () {
+      isAutoMove = false;
+    });
+    wrap.addEventListener('mouseleave', function () {
+      isAutoMove = true;
+    });
+  }
+  function autoMove() {
+    let timer = setInterval(function () {
+      if (isAutoMove) {
+        if (curIndex < 6) {
+          curIndex ++;
+        } else {
+          curIndex = 0;
+        }
+        changeImage();
+        activeText();
+      }
+    }, interval);
+  }
+  changeImage();
+  function start(){
+    initItemList();
+    addEnterListener();
+    autoMove();
+    return start;
+  }
+  window.attachEvent("onload", start())
+  </script>
+        <a href="https://www.youku.com" title="youku 优酷">
+          <img src="img/logo.svg" class="logo">
+        </a>
+        <div class="search">
+          <input type="text" value="" name="搜全网" />
+          <button class="button1"><a href="">搜全网</a></button>
+        </div>
+
+        <div class="side-bar">
+          <div class="usercenter">
+            <div class="vip">
+              <a href="" class="user">
+                <img src="img/皇冠.png" alt="">
+                <div class="vipcenter">VIP</div></a>
+            </div>
+            <div class="subsciption">
+              <a href="" class="user">
+                <img src="img/书签.png" alt="">
+                <div class="center">订阅</div></a>
+            </div>
+            <div class="document">
+              <a href="" class="user">
+                <img src="img/时间.png" alt="">
+                <div class="center">记录</div></a>
+            </div>
+            <div class="upload">
+              <a href="" class="user">
+                <img src="img/上箭头.png" alt="">
+                <div class="center">上传</div></a>
+            </div>
+            <div class="PC">
+              <a href="" class="user">
+                <img src="img/电脑.png" alt="">
+                <div class="center">客户端</div></a>
+            </div>
+            <div class="sign-up">
+              <a href="#" class="User"><input type="image" src="img/用户.png" style="width:50px;padding-left: 13px;" onclick="Show();"></a>
+            </div>
+            <div id="modal" class="modal">
+              <input type="image" id="back" src="img/关闭.png" onclick="this.parentNode.style.display='none'">
+              <div><img src="img/QQ截图.png" alt="" height="350px;">
+                <div class="board">
+                  <span style="font-size:18px;background-color:white;">账号登陆</span>
+                  <input type="text" name="" placeholder="手机/邮箱/优酷土豆账号" id="number">
+                  <input type="password" name="" placeholder="登录密码"id="key">
+                  <div><img src="img/visible.png" alt="" id="keyimg"></div>
+                  <input type="button" name="" value="" onclick="changetype()" id="keybutton">
+                  <script type="text/javascript">
+                    var ObtImg = document.getElementById("keyimg");
+                    var ObtInput = document.getElementById("key");
+                    function changetype(){
+                      if (ObtInput.type == "password") {
+                          ObtInput.type = "text";
+                          keyimg.src = "img/invisible.png";
+                          }
+                          else {
+                          ObtInput.type = "password";
+                          keyimg.src = "img/visible.png";
+                          }
+                        }
+
+                  </script>
+                  <div style="padding:20px;"><input type="checkbox" name="" value="记住我" checked><span style="font-size:12px;color:#666;">记住我</span></div>
+                  <input type="submit" value="登录" class="button2">
+                  <div class="otherways">
+                    <div class="ways">其他方式:</div>
+                      <div class="waysimg">
+                        <a href=""><img src="img/淘宝.png" alt="" style="width:28px;margin:13px 3px;"></a>
+                        <a href=""><img src="img/QQ.png" alt="" style="width:28px;margin:13px 3px;"></a>
+                        <a href=""><img src="img/微博.png" alt="" style="width:28px;margin:13px 3px;"></a>
+                        <a href=""><img src="img/支付宝.png" alt="" style="width:28px;margin:13px 3px;"></a>
+                        <a href=""><img src="img/微信.png" alt="" style="width:28px;margin:13px 3px;"></a>
+                      </div>
+                      <div class="ways"style="float:right;"><a href="">注册</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <script type="text/javascript">
+            function Show(){
+                   document.getElementById('modal').style.display ="block";
+               }
+            </script>
+
+          </div>
+        </div>
+
+     <div class="main-nav">
+       <ul class="main-left">
+           <li class="iteml item1">
+             <a href=""><img src="img/剧集.png">
+             剧集&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a></br><br>
+             <a href=""><img src="img/综艺.png">
+             综艺&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+           </li>
+           <li class="iteml item2">
+             <a href=""><img src="img/电影.png">
+             电影&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a></br></br>
+             <a href=""><img src="img/动漫.png">
+             动漫&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+           </li>
+           <li class="iteml item3">
+             <a href=""><img src="img/少儿.png">
+             少儿&nbsp&nbsp&nbsp&nbsp</a></br></br>
+             <a href=""><img src="img/纪录片.png">
+             纪录片&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+           </li>
+           <li class="line"></li>
+       </ul>
+       <ul class="main-right">
+         <li class="itemr">
+           <a href="">文化&nbsp&nbsp&nbsp&nbsp&nbsp</br></br></br></a>
+           <a href="">教育&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+         </li>
+         <li class="itemr">
+           <a href="">体育&nbsp&nbsp&nbsp&nbsp&nbsp</br></br></br></a>
+           <a href="">游戏&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+         </li>
+         <li class="itemr">
+           <a href="">来疯&nbsp&nbsp&nbsp&nbsp&nbsp</br></br></br></a>
+           <a href="">直播&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+         </li>
+         <li class="itemr">
+           <a href="">时尚&nbsp&nbsp&nbsp&nbsp&nbsp</br></br></br></a>
+           <a href="">搞笑&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+         </li>
+         <li class="itemr">
+           <a href="">音乐&nbsp&nbsp&nbsp&nbsp&nbsp</br></br></br></a>
+           <a href="">汽车&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+         </li>
+         <li class="itemr">
+           <a href="">文化&nbsp&nbsp&nbsp&nbsp&nbsp</br></br></br></a>
+           <a href="">教育&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+         </li>
+         <li class="itemr">
+           <a href="">旅游&nbsp&nbsp&nbsp&nbsp&nbsp</br></br></br></a>
+           <a href="">亲子&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+         </li>
+         <li class="itemr">
+           <a href="">娱乐&nbsp&nbsp&nbsp&nbsp&nbsp</br></br></br></a>
+           <a href="">生活&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+         </li>
+         <li class="itemr">
+           <a href="">资讯&nbsp&nbsp&nbsp&nbsp&nbsp</br></br></br></a>
+           <a href="">片库&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+         </li>
+         <li class="itemr">
+           <a href="">公益&nbsp&nbsp&nbsp&nbsp&nbsp</br></br></br></a>
+           <a href="">科技&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+         </li>
+         <li class="itemr">
+           <a href="">财经&nbsp&nbsp&nbsp&nbsp&nbsp</br></br></br></a>
+           <a href="">发现&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+         </li>
+       </ul>
+       <div class="index-right">
+         <a href="" class="ykpk">
+           <div class="ykpkhover"><img src="img/ykpk.png" alt=""></div>
+           <span class="HOVER" style="font-size:12px;">优酷片库</span>
+         </a>
+         <a href="" class="xzzx">
+           <div class="xzzxhover"><img src="img/xzzx.png"alt=""></div>
+           <span class="HOVER"style="font-size:12px;">下载中心</span>
+         </a>
+       </div>
+       </div>
+     </div>
+  <div class="allcontent">
+    <div class="common-container">
+      <div class="rebocontainer">
+        <div class="common-header">
+          <h2>
+          <span class="title">正在热播</span>
+          <span class="sub-title">
+            <a href="">&nbsp&nbsp&nbsp&nbsp最美中国色｜三分钟回眸辉煌70年之科技创新篇</a>
+          </span>
+          <a href="" class="change">
+            <img src="img/转换.png" alt="">换一换</a>
+          </h2>
+        </div>
+        <div class="rebo">
+          <div class="rebo-1">
+            <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p0.jpg" alt=""></div></div><span style="color:white;">05:32</span></a>
+            <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">全景CG大片：史诗70年</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">向中国历代奋斗者们致敬</div>
+            </div>
+          </div>
+          <div class="rebo-2">
+            <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p1.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+            <div class="rebotitle">
+            <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">2019中国好声音</a>
+            <div class="rebo-subtitle" style="font-size:12px;color:grey;">雷佳音东北味配音爆笑无敌</div>
+          </div>
+          </div>
+          <div class="rebo-3">
+            <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p2.jpg" alt=""></div></div><span style="color:white;">更新至15集</span></a>
+            <div class="rebotitle">
+            <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">合伙人</a>
+            <div class="rebo-subtitle" style="font-size:12px;color:grey;">高颜值小哥哥走心合奏"曹操"</div>
+          </div>
+          </div>
+          <div class="rebo-4">
+            <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p3.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+            <div class="rebotitle">
+            <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">你好，AI</a>
+            <div class="rebo-subtitle" style="font-size:12px;color:grey;">百米巨兽护卫女酋长</div>
+          </div>
+          </div>
+          <div class="rebo-5">
+            <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+            <div class="rebotitle">
+            <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">少年机会</a>
+            <div class="rebo-subtitle" style="font-size:12px;color:grey;">重现江南孤儿的草原人生</div>
+          </div>
+          </div>
+        <div class="rebo-6">
+          <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p5.jpg" alt=""></div></div><span style="color:white;">30集全</span></a>
+          <div class="rebotitle">
+            <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">遇见天坛</a>
+            <div class="rebo-subtitle" style="font-size:12px;color:grey;">鲜香爽辣，挑动味蕾的鸭脚煲</div>
+          </div>
+          </div>
+        </div>
+    </div></div>
+    <div class="juji-container">
+        <div class="juji-header">
+          <h2>
+            <div class="jujititle">剧集</div>
+            <div class="zuixintitle">
+              <div class="zuixinanv zuixin">最新</div>
+              <div class="zuixinanv daluju">大陆剧</div>
+              <div class="zuixinanv rihanju">日韩剧</div>
+              <div class="zuixinanv gangtai">港台剧</div>
+              <div class="zuixinanv yingmei">英美剧</div>
+            </div>
+          </h2>
+        </div>
+          <div class="zuixincontent zuixin0">
+            <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghoverspe"><div class="zximghospe" style="height:242px;"><img src="img/p10.jpg" alt=""></div></div><span style="color:white;">更新至20集</span></a>
+            <div class="zuixin0comment">
+              <h3 style="margin:30px 0 0 20px;">在远方-白月光初恋</h3>
+              <span style="font-size:12px;positon:relative;left:-260px;top:20px;color:#333;">快递穷小子恋上邮政千金</span>
+            </div>
+          </div>
+          <div class="zuixincontent">
+            <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho zximg1"><img src="img/p111.jpg" alt=""></div></div><span class="zximg1"style="color:white;left:90px;">更新至20集</span></a>
+            <div class="zuixincomment">
+              <h4 style="position: relative;right:-87px;">会员享全集</h4>
+              <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</br></br></br></span>
+            </div>
+          </div>
+          <div class="zuixincontent">
+            <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p12.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+            <div class="zuixincomment">
+              <h4 style="position: relative;right:-87px;">秘密</h4>
+              <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+            </div>
+          </div>
+          <div class="zuixincontent">
+            <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p13.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+            <div class="zuixincomment">
+              <h4 style="position: relative;right:-87px;">会员享全集</h4>
+              <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+            </div>
+          </div>
+          <div class="zuixincontent">
+            <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p14.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+            <div class="zuixincomment">
+              <h4 style="position: relative;right:-87px;">会员享全集</h4>
+              <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+            </div>
+          </div>
+          <div class="zxbottomcontent">
+            <div class="zuixincontent-b">
+              <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p15.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+              <div class="zuixincomment">
+                <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+              </div>
+            </div>
+            <div class="zuixincontent-b">
+              <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p16.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+              <div class="zuixincomment">
+                <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+              </div>
+            </div>
+            <div class="zuixincontent-b">
+              <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p17.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+              <div class="zuixincomment">
+                <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+              </div>
+            </div>
+            <div class="zuixincontent-b">
+              <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+              <div class="zuixincomment">
+                <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+              </div>
+            </div>
+          </div>
+
+
+      </div>
+    <div class="chaoji">
+      <div class="rebocontainer">
+        <div class="common-header">
+          <h2>
+          <span class="title">超级网剧</span>
+          <span class="sub-title">
+          </span>
+          </h2>
+        </div>
+        <div class="rebo">
+          <div class="rebo-1">
+            <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/wangju0.jpg" alt=""></div></div><span style="color:white;">05:32</span></a>
+            <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">全景CG大片：史诗70年</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">向中国历代奋斗者们致敬</div>
+            </div>
+          </div>
+          <div class="rebo-2">
+            <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p1.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+            <div class="rebotitle">
+            <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">2019中国好声音</a>
+            <div class="rebo-subtitle" style="font-size:12px;color:grey;">雷佳音东北味配音爆笑无敌</div>
+          </div>
+          </div>
+          <div class="rebo-3">
+            <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p2.jpg" alt=""></div></div><span style="color:white;">更新至15集</span></a>
+            <div class="rebotitle">
+            <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">合伙人</a>
+            <div class="rebo-subtitle" style="font-size:12px;color:grey;">高颜值小哥哥走心合奏"曹操"</div>
+          </div>
+          </div>
+          <div class="rebo-4">
+            <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p3.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+            <div class="rebotitle">
+            <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">你好，AI</a>
+            <div class="rebo-subtitle" style="font-size:12px;color:grey;">百米巨兽护卫女酋长</div>
+          </div>
+          </div>
+          <div class="rebo-5">
+            <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+            <div class="rebotitle">
+            <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">少年机会</a>
+            <div class="rebo-subtitle" style="font-size:12px;color:grey;">重现江南孤儿的草原人生</div>
+          </div>
+          </div>
+        <div class="rebo-6">
+          <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p5.jpg" alt=""></div></div><span style="color:white;">30集全</span></a>
+          <div class="rebotitle">
+            <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">遇见天坛</a>
+            <div class="rebo-subtitle" style="font-size:12px;color:grey;">鲜香爽辣，挑动味蕾的鸭脚煲</div>
+          </div>
+          </div>
+        </div>
+    </div>
+    <div class="ad1">
+      <a href=""><img src="img/ad1.jpg" alt="" style="width:1333px; margin-top:30px;"></a>
+    </div>
+    <div class="zongyi">
+      <div class="juji-container">
+          <div class="juji-header">
+            <h2>
+              <div class="jujititle">综艺</div>
+              <div class="zuixintitle">
+                <div class="zuixinanv zuixin">最新</div>
+                <div class="zuixinanv daluju">大陆剧</div>
+                <div class="zuixinanv rihanju">日韩剧</div>
+                <div class="zuixinanv gangtai">港台剧</div>
+                <div class="zuixinanv yingmei">英美剧</div>
+              </div>
+            </h2>
+          </div>
+            <div class="zuixincontent zuixin0">
+              <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghoverspe"><div class="zximghospe" style="height:242px;"><img src="img/zongyi0.jpg" alt=""></div></div><span style="color:white;">更新至20集</span></a>
+              <div class="zuixin0comment">
+                <h3 style="margin:30px 0 0 20px;">在远方-白月光初恋</h3>
+                <span style="font-size:12px;positon:relative;left:-260px;top:20px;color:#333;">快递穷小子恋上邮政千金</span>
+              </div>
+            </div>
+            <div class="zuixincontent">
+              <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho zximg1"><img src="img/p111.jpg" alt=""></div></div><span class="zximg1"style="color:white;left:90px;">更新至20集</span></a>
+              <div class="zuixincomment">
+                <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</br></br></br></span>
+              </div>
+            </div>
+            <div class="zuixincontent">
+              <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p12.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+              <div class="zuixincomment">
+                <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+              </div>
+            </div>
+            <div class="zuixincontent">
+              <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p13.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+              <div class="zuixincomment">
+                <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+              </div>
+            </div>
+            <div class="zuixincontent">
+              <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p14.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+              <div class="zuixincomment">
+                <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+              </div>
+            </div>
+            <div class="zxbottomcontent">
+              <div class="zuixincontent-b">
+                <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p15.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+                <div class="zuixincomment">
+                  <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                  <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+                </div>
+              </div>
+              <div class="zuixincontent-b">
+                <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p16.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+                <div class="zuixincomment">
+                  <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                  <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+                </div>
+              </div>
+              <div class="zuixincontent-b">
+                <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p17.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+                <div class="zuixincomment">
+                  <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                  <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+                </div>
+              </div>
+              <div class="zuixincontent-b">
+                <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+                <div class="zuixincomment">
+                  <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                  <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+                </div>
+              </div>
+            </div>
+
+
+        </div>
+    </div>
+      </div>
+    <div class="box" id="box">
+      <div class="hd">
+        <div class="dianyingtitle" style="display:inline-block;font-size:25px;font-weight: bold;"><a href="" style="color: #333;">电影</a></div>
+        <span class="current">热播</span>
+        <span>免费</span>
+        <span>好莱坞</span>
+        <span>预告片</span>
+      </div>
+      <div class="bd">
+        <ul>
+          <li class="current">
+            <div class="moviechange movierebo">
+              <div class="movietag1" style="background:#0099ff;width:28px;height:3px;"></div>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m1.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m2.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m3.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m4.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m5.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m6.jpg" alt=""></div></div></a>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+          </li>
+          <li>
+            <div class="moviechange movierebo">
+              <div class="movietag2" style="background:#0099ff;width:28px;height:3px;"></div>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m11.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m12.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m13.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m14.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m15.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m4.jpg" alt=""></div></div></a>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+          </li>
+          <li>
+            <div class="moviechange movierebo">
+              <div class="movietag3" style="background:#0099ff;width:48px;height:3px;"></div>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m21.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m22.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m23.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m24.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m25.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m26.jpg" alt=""></div></div></a>
+            </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+            </li>
+          <li>
+            <div class="moviechange movierebo">
+              <div class="movietag4" style="background:#0099ff;width:48px;height:3px;"></div>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m41.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m42.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m43.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m44.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m45.jpg" alt=""></div></div></a>
+              <a href=""><div class="moviehover"><div class="movieho"><img src="img/m46.jpg" alt=""></div></div></a>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  <div class="ad2">
+    <a href=""><img src="img/ad2.jpg" alt="" style="width:1333px;"></a>
+  </div>
+  <div class="box1" id="box1">
+    <div class="hd">
+      <div class="dianyingtitle" style="display:inline-block;font-size:25px;font-weight: bold;"><a href="" style="color: #333;">会员</a></div>
+      <span class="current" style="width:70px;">院线大片</span>
+      <span style="width:70px;">独播强档</span>
+      <span style="width:70px;">BBC经典</span>
+      <span style="width:70px;">热血动漫</span>
+    </div>
+    <div class="bd">
+      <ul>
+        <li class="current">
+          <div class="moviechange movierebo">
+            <div class="movietag5" style="background:#0099ff;width:59px;height:3px;"></div>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m1.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m2.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m3.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m4.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m5.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m6.jpg" alt=""></div></div></a>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+        </li>
+        <li>
+          <div class="moviechange movierebo">
+            <div class="movietag6" style="background:#0099ff;width:59px;height:3px;"></div>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m11.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m12.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m13.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m14.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m15.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m4.jpg" alt=""></div></div></a>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+        </li>
+        <li>
+          <div class="moviechange movierebo">
+            <div class="movietag7" style="background:#0099ff;width:59px;height:3px;"></div>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m21.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m22.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m23.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m24.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m25.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m26.jpg" alt=""></div></div></a>
+          </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+            <div class="m1title">
+              <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+              <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+            </div>
+          </li>
+        <li>
+          <div class="moviechange movierebo">
+            <div class="movietag8" style="background:#0099ff;width:59px;height:3px;"></div>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m41.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m42.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m43.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m44.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m45.jpg" alt=""></div></div></a>
+            <a href=""><div class="moviehover"><div class="movieho"><img src="img/m46.jpg" alt=""></div></div></a>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+          <div class="m1title">
+            <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+            <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="juji-container" style="top:370px;">
+      <div class="juji-header">
+        <h2>
+          <div class="jujititle">体育</div>
+          <div class="zuixintitle">
+            <div class="zuixinanv zuixin">最新资讯</div>
+            <div class="zuixinanv daluju">大陆剧</div>
+            <div class="zuixinanv rihanju">日韩剧</div>
+            <div class="zuixinanv gangtai">港台剧</div>
+            <div class="zuixinanv yingmei">英美剧</div>
+          </div>
+        </h2>
+      </div>
+        <div class="zuixincontent zuixin0">
+          <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghoverspe"><div class="zximghospe" style="height:242px;"><img src="img/tiyu.jpg" alt=""></div></div><span style="color:white;">更新至20集</span></a>
+          <div class="zuixin0comment">
+            <h3 style="margin:30px 0 0 20px;">在远方-白月光初恋</h3>
+            <span style="font-size:12px;positon:relative;left:-260px;top:20px;color:#333;">快递穷小子恋上邮政千金</span>
+          </div>
+        </div>
+        <div class="zuixincontent">
+          <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho zximg1"><img src="img/p111.jpg" alt=""></div></div><span class="zximg1"style="color:white;left:90px;">更新至20集</span></a>
+          <div class="zuixincomment">
+            <h4 style="position: relative;right:-87px;">会员享全集</h4>
+            <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</br></br></br></span>
+          </div>
+        </div>
+        <div class="zuixincontent">
+          <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p12.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+          <div class="zuixincomment">
+            <h4 style="position: relative;right:-87px;">会员享全集</h4>
+            <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+          </div>
+        </div>
+        <div class="zuixincontent">
+          <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p13.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+          <div class="zuixincomment">
+            <h4 style="position: relative;right:-87px;">会员享全集</h4>
+            <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+          </div>
+        </div>
+        <div class="zuixincontent">
+          <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p14.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+          <div class="zuixincomment">
+            <h4 style="position: relative;right:-87px;">会员享全集</h4>
+            <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+          </div>
+        </div>
+        <div class="zxbottomcontent">
+          <div class="zuixincontent-b">
+            <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p15.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+            <div class="zuixincomment">
+              <h4 style="position: relative;right:-87px;">会员享全集</h4>
+              <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+            </div>
+          </div>
+          <div class="zuixincontent-b">
+            <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p16.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+            <div class="zuixincomment">
+              <h4 style="position: relative;right:-87px;">会员享全集</h4>
+              <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+            </div>
+          </div>
+          <div class="zuixincontent-b">
+            <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p17.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+            <div class="zuixincomment">
+              <h4 style="position: relative;right:-87px;">会员享全集</h4>
+              <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+            </div>
+          </div>
+          <div class="zuixincontent-b">
+            <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+            <div class="zuixincomment">
+              <h4 style="position: relative;right:-87px;">会员享全集</h4>
+              <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="common-container" style="top:500px;">
+        <div class="rebocontainer">
+          <div class="common-header">
+            <h2>
+            <span class="title">正在热播</span>
+            <span class="sub-title">
+              <a href="">&nbsp&nbsp&nbsp&nbsp最美中国色｜三分钟回眸辉煌70年之科技创新篇</a>
+            </span>
+            <a href="" class="change">
+              <img src="img/转换.png" alt="">换一换</a>
+            </h2>
+          </div>
+          <div class="rebo">
+            <div class="rebo-1">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p0.jpg" alt=""></div></div><span style="color:white;">05:32</span></a>
+              <div class="rebotitle">
+                <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">全景CG大片：史诗70年</a>
+                <div class="rebo-subtitle" style="font-size:12px;color:grey;">向中国历代奋斗者们致敬</div>
+              </div>
+            </div>
+            <div class="rebo-2">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p1.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">2019中国好声音</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">雷佳音东北味配音爆笑无敌</div>
+            </div>
+            </div>
+            <div class="rebo-3">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p2.jpg" alt=""></div></div><span style="color:white;">更新至15集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">合伙人</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">高颜值小哥哥走心合奏"曹操"</div>
+            </div>
+            </div>
+            <div class="rebo-4">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p3.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">你好，AI</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">百米巨兽护卫女酋长</div>
+            </div>
+            </div>
+            <div class="rebo-5">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">少年机会</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">重现江南孤儿的草原人生</div>
+            </div>
+            </div>
+          <div class="rebo-6">
+            <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p5.jpg" alt=""></div></div><span style="color:white;">30集全</span></a>
+            <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">遇见天坛</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">鲜香爽辣，挑动味蕾的鸭脚煲</div>
+            </div>
+            </div>
+          </div>
+      </div></div>
+      <div class="ad3">
+        <a href=""><img src="img/ad1.jpg" alt="" style="width:1333px; margin-top:30px;"></a>
+      </div>
+      <div class="zongyi2">
+        <div class="juji-container">
+            <div class="juji-header">
+              <h2>
+                <div class="jujititle">综艺</div>
+                <div class="zuixintitle">
+                  <div class="zuixinanv zuixin">最新</div>
+                  <div class="zuixinanv daluju">大陆剧</div>
+                  <div class="zuixinanv rihanju">日韩剧</div>
+                  <div class="zuixinanv gangtai">港台剧</div>
+                  <div class="zuixinanv yingmei">英美剧</div>
+                </div>
+              </h2>
+            </div>
+              <div class="zuixincontent zuixin0">
+                <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghoverspe"><div class="zximghospe" style="height:242px;"><img src="img/zongyi0.jpg" alt=""></div></div><span style="color:white;">更新至20集</span></a>
+                <div class="zuixin0comment">
+                  <h3 style="margin:30px 0 0 20px;">在远方-白月光初恋</h3>
+                  <span style="font-size:12px;positon:relative;left:-260px;top:20px;color:#333;">快递穷小子恋上邮政千金</span>
+                </div>
+              </div>
+              <div class="zuixincontent">
+                <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho zximg1"><img src="img/p111.jpg" alt=""></div></div><span class="zximg1"style="color:white;left:90px;">更新至20集</span></a>
+                <div class="zuixincomment">
+                  <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                  <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</br></br></br></span>
+                </div>
+              </div>
+              <div class="zuixincontent">
+                <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p12.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+                <div class="zuixincomment">
+                  <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                  <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+                </div>
+              </div>
+              <div class="zuixincontent">
+                <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p13.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+                <div class="zuixincomment">
+                  <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                  <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+                </div>
+              </div>
+              <div class="zuixincontent">
+                <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p14.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+                <div class="zuixincomment">
+                  <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                  <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+                </div>
+              </div>
+              <div class="zxbottomcontent">
+                <div class="zuixincontent-b">
+                  <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p15.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+                  <div class="zuixincomment">
+                    <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                    <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+                  </div>
+                </div>
+                <div class="zuixincontent-b">
+                  <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p16.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+                  <div class="zuixincomment">
+                    <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                    <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+                  </div>
+                </div>
+                <div class="zuixincontent-b">
+                  <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p17.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+                  <div class="zuixincomment">
+                    <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                    <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+                  </div>
+                </div>
+                <div class="zuixincontent-b">
+                  <a href="" class="zximgp" title="在远方-白月光初恋"><div class="zximghover"><div class="zximgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;left:90px;">更新至20集</span></a>
+                  <div class="zuixincomment">
+                    <h4 style="position: relative;right:-87px;">会员享全集</h4>
+                    <span style="positon:relative;right:-20px;top:0;color:#999;">快递穷小子恋上邮政千金</span>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+      <div class="common-container" style="top:840px;">
+        <div class="rebocontainer">
+          <div class="common-header">
+            <h2>
+            <span class="title">正在热播</span>
+            <span class="sub-title">
+              <a href="">&nbsp&nbsp&nbsp&nbsp最美中国色｜三分钟回眸辉煌70年之科技创新篇</a>
+            </span>
+            <a href="" class="change">
+              <img src="img/转换.png" alt="">换一换</a>
+            </h2>
+          </div>
+          <div class="rebo">
+            <div class="rebo-1">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p0.jpg" alt=""></div></div><span style="color:white;">05:32</span></a>
+              <div class="rebotitle">
+                <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">全景CG大片：史诗70年</a>
+                <div class="rebo-subtitle" style="font-size:12px;color:grey;">向中国历代奋斗者们致敬</div>
+              </div>
+            </div>
+            <div class="rebo-2">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p1.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">2019中国好声音</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">雷佳音东北味配音爆笑无敌</div>
+            </div>
+            </div>
+            <div class="rebo-3">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p2.jpg" alt=""></div></div><span style="color:white;">更新至15集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">合伙人</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">高颜值小哥哥走心合奏"曹操"</div>
+            </div>
+            </div>
+            <div class="rebo-4">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p3.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">你好，AI</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">百米巨兽护卫女酋长</div>
+            </div>
+            </div>
+            <div class="rebo-5">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">少年机会</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">重现江南孤儿的草原人生</div>
+            </div>
+            </div>
+          <div class="rebo-6">
+            <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p5.jpg" alt=""></div></div><span style="color:white;">30集全</span></a>
+            <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">遇见天坛</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">鲜香爽辣，挑动味蕾的鸭脚煲</div>
+            </div>
+            </div>
+          </div>
+      </div></div>
+      <div class="common-container" style="top:900px;">
+        <div class="rebocontainer">
+          <div class="common-header">
+            <h2>
+            <span class="title">正在热播</span>
+            <span class="sub-title">
+              <a href="">&nbsp&nbsp&nbsp&nbsp最美中国色｜三分钟回眸辉煌70年之科技创新篇</a>
+            </span>
+            <a href="" class="change">
+              <img src="img/转换.png" alt="">换一换</a>
+            </h2>
+          </div>
+          <div class="rebo">
+            <div class="rebo-1">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/7.jpg" alt=""></div></div><span style="color:white;">05:32</span></a>
+              <div class="rebotitle">
+                <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">全景CG大片：史诗70年</a>
+                <div class="rebo-subtitle" style="font-size:12px;color:grey;">向中国历代奋斗者们致敬</div>
+              </div>
+            </div>
+            <div class="rebo-2">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p1.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">2019中国好声音</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">雷佳音东北味配音爆笑无敌</div>
+            </div>
+            </div>
+            <div class="rebo-3">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p2.jpg" alt=""></div></div><span style="color:white;">更新至15集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">合伙人</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">高颜值小哥哥走心合奏"曹操"</div>
+            </div>
+            </div>
+            <div class="rebo-4">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p3.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">你好，AI</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">百米巨兽护卫女酋长</div>
+            </div>
+            </div>
+            <div class="rebo-5">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">少年机会</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">重现江南孤儿的草原人生</div>
+            </div>
+            </div>
+          <div class="rebo-6">
+            <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p5.jpg" alt=""></div></div><span style="color:white;">30集全</span></a>
+            <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">遇见天坛</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">鲜香爽辣，挑动味蕾的鸭脚煲</div>
+            </div>
+            </div>
+          </div>
+      </div></div>
+      <div class="common-container" style="top:950px;">
+        <div class="rebocontainer">
+          <div class="common-header">
+            <h2>
+            <span class="title">正在热播</span>
+            <span class="sub-title">
+              <a href="">&nbsp&nbsp&nbsp&nbsp最美中国色｜三分钟回眸辉煌70年之科技创新篇</a>
+            </span>
+            <a href="" class="change">
+              <img src="img/转换.png" alt="">换一换</a>
+            </h2>
+          </div>
+          <div class="rebo">
+            <div class="rebo-1">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p0.jpg" alt=""></div></div><span style="color:white;">05:32</span></a>
+              <div class="rebotitle">
+                <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">全景CG大片：史诗70年</a>
+                <div class="rebo-subtitle" style="font-size:12px;color:grey;">向中国历代奋斗者们致敬</div>
+              </div>
+            </div>
+            <div class="rebo-2">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p1.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">2019中国好声音</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">雷佳音东北味配音爆笑无敌</div>
+            </div>
+            </div>
+            <div class="rebo-3">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p2.jpg" alt=""></div></div><span style="color:white;">更新至15集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">合伙人</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">高颜值小哥哥走心合奏"曹操"</div>
+            </div>
+            </div>
+            <div class="rebo-4">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p3.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">你好，AI</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">百米巨兽护卫女酋长</div>
+            </div>
+            </div>
+            <div class="rebo-5">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">少年机会</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">重现江南孤儿的草原人生</div>
+            </div>
+            </div>
+          <div class="rebo-6">
+            <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p5.jpg" alt=""></div></div><span style="color:white;">30集全</span></a>
+            <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">遇见天坛</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">鲜香爽辣，挑动味蕾的鸭脚煲</div>
+            </div>
+            </div>
+          </div>
+      </div></div>
+      <div class="common-container" style="top:1000px;">
+        <div class="rebocontainer">
+          <div class="common-header">
+            <h2>
+            <span class="title">正在热播</span>
+            <span class="sub-title">
+              <a href="">&nbsp&nbsp&nbsp&nbsp最美中国色｜三分钟回眸辉煌70年之科技创新篇</a>
+            </span>
+            <a href="" class="change">
+              <img src="img/转换.png" alt="">换一换</a>
+            </h2>
+          </div>
+          <div class="rebo">
+            <div class="rebo-1">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/0.jpg" alt=""></div></div><span style="color:white;">05:32</span></a>
+              <div class="rebotitle">
+                <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">全景CG大片：史诗70年</a>
+                <div class="rebo-subtitle" style="font-size:12px;color:grey;">向中国历代奋斗者们致敬</div>
+              </div>
+            </div>
+            <div class="rebo-2">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p1.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">2019中国好声音</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">雷佳音东北味配音爆笑无敌</div>
+            </div>
+            </div>
+            <div class="rebo-3">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p2.jpg" alt=""></div></div><span style="color:white;">更新至15集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">合伙人</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">高颜值小哥哥走心合奏"曹操"</div>
+            </div>
+            </div>
+            <div class="rebo-4">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p3.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">你好，AI</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">百米巨兽护卫女酋长</div>
+            </div>
+            </div>
+            <div class="rebo-5">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">少年机会</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">重现江南孤儿的草原人生</div>
+            </div>
+            </div>
+          <div class="rebo-6">
+            <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p5.jpg" alt=""></div></div><span style="color:white;">30集全</span></a>
+            <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">遇见天坛</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">鲜香爽辣，挑动味蕾的鸭脚煲</div>
+            </div>
+            </div>
+          </div>
+      </div></div>
+      <div class="common-container" style="top:1050px;">
+        <div class="rebocontainer">
+          <div class="common-header">
+            <h2>
+            <span class="title">正在热播</span>
+            <span class="sub-title">
+              <a href="">&nbsp&nbsp&nbsp&nbsp最美中国色｜三分钟回眸辉煌70年之科技创新篇</a>
+            </span>
+            <a href="" class="change">
+              <img src="img/转换.png" alt="">换一换</a>
+            </h2>
+          </div>
+          <div class="rebo">
+            <div class="rebo-1">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p0.jpg" alt=""></div></div><span style="color:white;">05:32</span></a>
+              <div class="rebotitle">
+                <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">全景CG大片：史诗70年</a>
+                <div class="rebo-subtitle" style="font-size:12px;color:grey;">向中国历代奋斗者们致敬</div>
+              </div>
+            </div>
+            <div class="rebo-2">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p1.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">2019中国好声音</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">雷佳音东北味配音爆笑无敌</div>
+            </div>
+            </div>
+            <div class="rebo-3">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p2.jpg" alt=""></div></div><span style="color:white;">更新至15集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">合伙人</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">高颜值小哥哥走心合奏"曹操"</div>
+            </div>
+            </div>
+            <div class="rebo-4">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p3.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">你好，AI</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">百米巨兽护卫女酋长</div>
+            </div>
+            </div>
+            <div class="rebo-5">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">少年机会</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">重现江南孤儿的草原人生</div>
+            </div>
+            </div>
+          <div class="rebo-6">
+            <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p5.jpg" alt=""></div></div><span style="color:white;">30集全</span></a>
+            <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">遇见天坛</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">鲜香爽辣，挑动味蕾的鸭脚煲</div>
+            </div>
+            </div>
+          </div>
+      </div></div>
+      <div class="common-container" style="top:1100px;">
+        <div class="rebocontainer">
+          <div class="common-header">
+            <h2>
+            <span class="title">正在热播</span>
+            <span class="sub-title">
+              <a href="">&nbsp&nbsp&nbsp&nbsp最美中国色｜三分钟回眸辉煌70年之科技创新篇</a>
+            </span>
+            <a href="" class="change">
+              <img src="img/转换.png" alt="">换一换</a>
+            </h2>
+          </div>
+          <div class="rebo">
+            <div class="rebo-1">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/e.jpg" alt=""></div></div><span style="color:white;">05:32</span></a>
+              <div class="rebotitle">
+                <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">全景CG大片：史诗70年</a>
+                <div class="rebo-subtitle" style="font-size:12px;color:grey;">向中国历代奋斗者们致敬</div>
+              </div>
+            </div>
+            <div class="rebo-2">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p1.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">2019中国好声音</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">雷佳音东北味配音爆笑无敌</div>
+            </div>
+            </div>
+            <div class="rebo-3">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p2.jpg" alt=""></div></div><span style="color:white;">更新至15集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">合伙人</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">高颜值小哥哥走心合奏"曹操"</div>
+            </div>
+            </div>
+            <div class="rebo-4">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p3.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">你好，AI</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">百米巨兽护卫女酋长</div>
+            </div>
+            </div>
+            <div class="rebo-5">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">少年机会</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">重现江南孤儿的草原人生</div>
+            </div>
+            </div>
+          <div class="rebo-6">
+            <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p5.jpg" alt=""></div></div><span style="color:white;">30集全</span></a>
+            <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">遇见天坛</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">鲜香爽辣，挑动味蕾的鸭脚煲</div>
+            </div>
+            </div>
+          </div>
+      </div></div>
+      <div class="common-container" style="top:1170px;">
+        <div class="rebocontainer">
+          <div class="common-header">
+            <h2>
+            <span class="title">正在热播</span>
+            <span class="sub-title">
+              <a href="">&nbsp&nbsp&nbsp&nbsp最美中国色｜三分钟回眸辉煌70年之科技创新篇</a>
+            </span>
+            <a href="" class="change">
+              <img src="img/转换.png" alt="">换一换</a>
+            </h2>
+          </div>
+          <div class="rebo">
+            <div class="rebo-1">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/a.jpg" alt=""></div></div><span style="color:white;">05:32</span></a>
+              <div class="rebotitle">
+                <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">全景CG大片：史诗70年</a>
+                <div class="rebo-subtitle" style="font-size:12px;color:grey;">向中国历代奋斗者们致敬</div>
+              </div>
+            </div>
+            <div class="rebo-2">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p1.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">2019中国好声音</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">雷佳音东北味配音爆笑无敌</div>
+            </div>
+            </div>
+            <div class="rebo-3">
+              <a href="" class="imgp" title="全景CG大片：史诗70年"><div class="imghover"><div class="imgho"><img src="img/p2.jpg" alt=""></div></div><span style="color:white;">更新至15集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">合伙人</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">高颜值小哥哥走心合奏"曹操"</div>
+            </div>
+            </div>
+            <div class="rebo-4">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p3.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">你好，AI</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">百米巨兽护卫女酋长</div>
+            </div>
+            </div>
+            <div class="rebo-5">
+              <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p4.jpg" alt=""></div></div><span style="color:white;">更新至九集</span></a>
+              <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">少年机会</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">重现江南孤儿的草原人生</div>
+            </div>
+            </div>
+          <div class="rebo-6">
+            <a href="" class="imgp"><div class="imghover"><div class="imgho"><img src="img/p5.jpg" alt=""></div></div><span style="color:white;">30集全</span></a>
+            <div class="rebotitle">
+              <a href="" title="全景CG大片：史诗70年" class="rebo-maintitle" style="color:black; font-weight:bold;">遇见天坛</a>
+              <div class="rebo-subtitle" style="font-size:12px;color:grey;">鲜香爽辣，挑动味蕾的鸭脚煲</div>
+            </div>
+            </div>
+          </div>
+      </div></div>
+      <div class="ad4">
+        <a href=""><img src="img/ad1.jpg" alt="" style="width:1333px; margin-top:30px;"></a>
+      </div>
+      <div class="box2" id="box2">
+        <div class="hd">
+          <div class="dianyingtitle" style="display:inline-block;font-size:25px;font-weight: bold;"><a href="" style="color: #333;">电影</a></div>
+          <span class="current">热播</span>
+          <span>免费</span>
+          <span>好莱坞</span>
+          <span>预告片</span>
+        </div>
+        <div class="bd">
+          <ul>
+            <li class="current">
+              <div class="moviechange movierebo">
+                <div class="movietag1" style="background:#0099ff;width:28px;height:3px;"></div>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m1.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m2.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m3.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m4.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m5.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m6.jpg" alt=""></div></div></a>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+            </li>
+            <li>
+              <div class="moviechange movierebo">
+                <div class="movietag2" style="background:#0099ff;width:28px;height:3px;"></div>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m11.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m12.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m13.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m14.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m15.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m4.jpg" alt=""></div></div></a>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+            </li>
+            <li>
+              <div class="moviechange movierebo">
+                <div class="movietag3" style="background:#0099ff;width:48px;height:3px;"></div>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m21.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m22.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m23.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m24.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m25.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m26.jpg" alt=""></div></div></a>
+              </div>
+                <div class="m1title">
+                  <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+                  <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+                </div>
+                <div class="m1title">
+                  <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+                  <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+                </div>
+                <div class="m1title">
+                  <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+                  <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+                </div>
+                <div class="m1title">
+                  <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+                  <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+                </div>
+                <div class="m1title">
+                  <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+                  <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+                </div>
+                <div class="m1title">
+                  <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+                  <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+                </div>
+              </li>
+            <li>
+              <div class="moviechange movierebo">
+                <div class="movietag4" style="background:#0099ff;width:48px;height:3px;"></div>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m41.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m42.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m43.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m44.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m45.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m46.jpg" alt=""></div></div></a>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="box3" id="box3">
+        <div class="hd">
+          <div class="dianyingtitle" style="display:inline-block;font-size:25px;font-weight: bold;"><a href="" style="color: #333;">电影</a></div>
+          <span class="current">热播</span>
+          <span>免费</span>
+          <span>好莱坞</span>
+          <span>预告片</span>
+        </div>
+        <div class="bd">
+          <ul>
+            <li class="current">
+              <div class="moviechange movierebo">
+                <div class="movietag1" style="background:#0099ff;width:28px;height:3px;"></div>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m1.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m2.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m3.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m4.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m5.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m6.jpg" alt=""></div></div></a>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+            </li>
+            <li>
+              <div class="moviechange movierebo">
+                <div class="movietag2" style="background:#0099ff;width:28px;height:3px;"></div>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m11.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m12.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m13.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m14.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m15.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m4.jpg" alt=""></div></div></a>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+            </li>
+            <li>
+              <div class="moviechange movierebo">
+                <div class="movietag3" style="background:#0099ff;width:48px;height:3px;"></div>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m21.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m22.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m23.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m24.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m25.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m26.jpg" alt=""></div></div></a>
+              </div>
+                <div class="m1title">
+                  <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+                  <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+                </div>
+                <div class="m1title">
+                  <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+                  <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+                </div>
+                <div class="m1title">
+                  <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+                  <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+                </div>
+                <div class="m1title">
+                  <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+                  <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+                </div>
+                <div class="m1title">
+                  <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+                  <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+                </div>
+                <div class="m1title">
+                  <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+                  <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+                </div>
+              </li>
+            <li>
+              <div class="moviechange movierebo">
+                <div class="movietag4" style="background:#0099ff;width:48px;height:3px;"></div>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m41.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m42.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m43.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m44.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m45.jpg" alt=""></div></div></a>
+                <a href=""><div class="moviehover"><div class="movieho"><img src="img/m46.jpg" alt=""></div></div></a>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">铤而走险</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">银河补习班</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">邓超催泪诠释父爱</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">烈火英雄</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">深夜食堂</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">《中国机长》独家幕后</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+              <div class="m1title">
+                <div class="m1maintitle" style="font-size:15px;color:#333;font-weight:700;">沉默的证人</div>
+                <div class="m1subtitle" style="font-size:12px;color:grey;">大鹏欧豪高能硬刚</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-container">
+        <div class="foot">
+          <dl>
+            <dt><a href="">关于广大优酷事业群</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+        </dl>
+        </div>
+        <div class="foot">
+          <dl>
+            <dt><a href="">关于广大优酷事业群</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+        </dl>
+        </div>
+        <div class="foot">
+          <dl>
+            <dt><a href="">关于广大优酷事业群</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+        </dl>
+        </div>
+        <div class="foot">
+          <dl>
+            <dt><a href="">关于广大优酷事业群</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+            <dt><a href="">友情链接</a></dt>
+        </dl>
+        </div>
+        <div class="footright">
+          <div class="foot">
+            <dl>
+              <dt><a href="">关于广大优酷事业群</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+          </dl>
+          </div>
+          <div class="foot">
+            <dl>
+              <dt><a href="">关于广大优酷事业群</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+          </dl>
+          </div>
+          <div class="foot">
+            <dl>
+              <dt><a href="">关于广大优酷事业群</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+          </dl>
+          </div>
+          <div class="foot">
+            <dl>
+              <dt><a href="">关于广大优酷事业群</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+              <dt><a href="">友情链接</a></dt>
+          </dl>
+          </div>
+        </div>
+        <img src="img/1234.png" alt="" id="erweima">
+      </div>
+<script>
+  var box = document.getElementById("box");
+  var spans = box.getElementsByTagName("span");
+  var lis = box.getElementsByTagName("li");
+  for (var i = 0; i < spans.length; i++) {
+    spans[i].a = i;
+    spans[i].onclick = function () {
+      for (var i = 0; i < spans.length; i++) {
+        spans[i].className = "";
+        lis[i].className = "";
+      }
+      this.className = "current";
+      lis[this.a].className = "current";
+    }
+  }
+
+  var box1 = document.getElementById("box1");
+  var spans1 = box1.getElementsByTagName("span");
+  var lis1 = box1.getElementsByTagName("li");
+  for (var i = 0; i < spans1.length; i++) {
+    spans1[i].a = i;
+    spans1[i].onclick = function () {
+      for (var i = 0; i < spans1.length; i++) {
+        spans1[i].className = "";
+        lis1[i].className = "";
+      }
+      this.className = "current";
+      lis1[this.a].className = "current";
+    }
+  }
+</script>
+
+</body>
+</html>

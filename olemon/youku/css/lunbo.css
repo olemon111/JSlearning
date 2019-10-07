@@ -1,0 +1,57 @@
+.wrap {
+  height: 420px;
+  background-color: #000;
+  width: 100%;
+}
+.wrap .img-wrap {
+  height: 100%;
+  margin: 0 auto;
+  background-image: url('img/img1.jpg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: auto 100%;
+  position: relative;
+}
+.wrap .img-wrap .item-list{
+  right:100px;
+}
+.side-bar {
+  position: absolute;
+  width: 260px;
+  height:420px;
+  top:72px;
+  right: 100px;
+}
+
+.wrap .img-wrap .item-list {
+  box-sizing: border-box;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  width: 280px;
+  position: absolute;
+
+  list-style: none;
+  padding: 10px 0;
+}
+.wrap .img-wrap .item-list li {
+  padding: 0 15px;
+}
+.wrap .img-wrap .item-list li.active {
+  background: linear-gradient(to right, rgba(0,0,0,.5), rgba(0,0,0,0));
+  cursor: pointer;
+}
+.wrap .img-wrap .item-list li span {
+  line-height: 40px;
+  color: #eee;
+  font-size: 15px;
+}
+.wrap .img-wrap .item-list li.active span {
+  display: block;
+}
+.wrap .img-wrap .item-list li.active span:nth-child(1) {
+  font-size: 24px;
+  transition: font-size 0.2s;
+}
+.wrap .img-wrap .item-list li.active span:nth-child(2) {
+  display: none;
+}

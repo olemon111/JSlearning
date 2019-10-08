@@ -12,11 +12,9 @@ window.onload = function(){
             obtn.style.display = 'none';
         }
         if(!isTop){
-
             clearInterval(timer);
         }
         isTop = false;
-
     }
     obtn.onclick = function(){
         timer = setInterval(function(){

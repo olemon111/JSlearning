@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-10-29 18:07:31
- * @LastEditTime: 2019-11-02 10:12:19
+ * @LastEditTime: 2019-11-02 08:43:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \test\js\index.js
@@ -22,9 +22,7 @@ var oselectAll=document.getElementById("selectAll");
 var ocontent= document.getElementById("content");
 var ounselected=document.getElementsByClassName("");
 var oInput = document.getElementsByTagName("input")[0];
-/*var oFoot = document.getElementById("foot");*/
-var NewInput=document.getElementsByClassName("newinput");
-
+/*var NewInput=document.getElementsByClassName("newinput")[0];*/
 
 
 
@@ -40,18 +38,18 @@ window.onload = function(){
             oInput.value = "";
             itemNumber();
         }
-  /*      for(var i=0; i<deletebutton.length;i++){
-          deletebutton.className="delete";
-       }
-*/
+
+
 
         for(var j=0;j<oCheckbox.length;j++){
     
             oCheckbox[j].addEventListener("click",function () { 
                 if(this.parentNode.className=="selected"){
                     this.parentNode.className="";
+                    this.style.opacity = 0.2;
+                    oCheckbox[j].style.backgroundImage = "url('C:\Users\15527898926\Desktop\test\'css\images\未选.png')";
                     
-                    oCheckbox[j].style.backgroundImage = "url('css\images\未选.png')";
+                    
                 }
                 else{
                     this.parentNode.className="selected"; 
@@ -65,6 +63,41 @@ window.onload = function(){
         for(var i=0;i<oLi.length;i++) {
             if(oLi[i].style.display!="none")
             oLi[i].style.display="block";
+            oLi[i].ondblclick =function(){
+              var previousvalue = this.getElementsByTagName("span")[0].innerHTML;
+              var newInput = document.createElement("input");
+
+              this.appendChild(newInput);
+              newInput.className = "newinput";
+              newInput.value = previousvalue;
+         /*     this.getElementsByTagName("span")[0].innerHTML= "";*/
+
+
+              
+              
+              /*onkeydown = function(event) {
+                var event = event || window.event;
+                
+                if(event.keyCode == 13 && newInput.value!="") {
+                 /*   var data = newInput.value;*/
+              /*      oLi[i].getElementsByTagName("span")[0].innerHTML=this.value;*/
+                    
+                }
+
+
+
+            }
+            
+/*            NewInput.addEventListener("blur",function(){
+              NewInput.style.display="none";
+            })
+
+
+   /*       newInput.onkeydown = function(event) {
+
+              oLi[i].getElementsByTagName("span")[0].innerHTML=this.value;
+              newInput.style.display="none";
+            }*/
         }
 
         oactive.addEventListener("click",function(){
@@ -126,6 +159,7 @@ window.onload = function(){
           })
 
 
+
 }
 }
 
@@ -141,6 +175,7 @@ function addData(data){
     createLi.appendChild(createCheckbox);
     createLi.appendChild(createSpan);
     createLi.appendChild(createBtn);
+    createBtn.className = "delete";
     createLi.className = "";
 
     oUl.appendChild(createLi);
@@ -151,8 +186,9 @@ function addData(data){
           aUl.removeChild(this.parentNode);
           itemNumber();
         }
-        
+
    }
+
 
    
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-10-29 18:07:31
- * @LastEditTime: 2019-11-02 13:30:07
+ * @LastEditTime: 2019-11-02 16:45:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \test\js\index.js
@@ -29,6 +29,7 @@ var NewInput=document.getElementsByClassName("newinput");
 window.onload = function(){
 
     
+    oFoot.style.display = "none";
     oInput.onkeydown = function(event) {
         var event = event || window.event;
         
@@ -77,25 +78,43 @@ window.onload = function(){
            oLi[i].ondblclick =function(){
               var previousvalue = this.getElementsByTagName("span")[0].innerHTML;
               var newInput = document.createElement("input");
+                if(NewInput.length<=0){
+                	this.appendChild(newInput);
+             		  newInput.className = "newinput";
+              		newInput.value = previousvalue;
+              		this.getElementsByTagName("span")[0].innerHTML= "";
+                }
+              
 
-              this.appendChild(newInput);
-              newInput.className = "newinput";
-              newInput.value = previousvalue;
-              this.getElementsByTagName("span")[0].innerHTML= "";
+              
+              NewInput[0].addEventListener("keydown",function(event){
+               var event = event || window.event;
+               if(event.keyCode == 13) {
+
+									if(NewInput[0].value!=""){
+										NewInput[0].parentNode.getElementsByTagName("span")[0].innerHTML=NewInput[0].value;
+										NewInput[0].parentNode.removeChild(NewInput[0]);
+									}
+									else {
+										NewInput[0].parentNode.parentNode.removeChild(NewInput[0].parentNode);
+									}
+                  
+          
+                      }
+                    })  
+
+                    NewInput[0].addEventListener("blur",function(){
+											if(NewInput[0].value!=""){
+												NewInput[0].parentNode.getElementsByTagName("span")[0].innerHTML=NewInput[0].value;
+												NewInput[0].parentNode.removeChild(NewInput[0]);
+											}
+											else {
+												NewInput[0].parentNode.parentNode.removeChild(NewInput[0].parentNode);
+											}
+                      })  
            }
         }
-
-
-        
-
-  /*       NewInput[0].addEventListener("blur",function(){
-            this.parentNode.getElementsByTagName("span")[0].innerHTML=this.value;
-            this.parentNode.removeChild(NewInput[0]);
-          })  
-
-
-         
-   */   
+  
 
         oactive.addEventListener("click",function(){
             for(var k=0;k<oLi.length;k++){
@@ -131,7 +150,6 @@ window.onload = function(){
 
         var flag=false;
         oselectAll.addEventListener("click",function () {
-
             if(flag){
                 for(var k=0; k<oLi.length; k++){
                     oLi[k].className="";
@@ -159,20 +177,11 @@ window.onload = function(){
 
 }
 
-    NewInput[0].addEventListener("keydown",function(event){
-    var event = event || window.event;
-    if(event.keyCode == 13) {
-      NewInput[0].parentNode.getElementsByTagName("span")[0].innerHTML=NewInput[0].value;
-      NewInput[0].parentNode.removeChild(NewInput[0]);
-      
-    }   
-   })  
 
 
 
 }
 
-oFoot.style.display = "none";
 
 
 function addData(data){

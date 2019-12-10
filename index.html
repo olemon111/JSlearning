@@ -1,0 +1,48 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-10 00:28:09
+ * @LastEditTime: 2019-12-10 17:47:43
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \clock\index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/main.css">
+  <title>clock</title>
+</head>
+<body>
+  <div class="container">
+    <div id="hour"></div>
+    <div id="minute"></div>
+    <div id="second"></div>
+  </div>
+</body>
+<script>
+  var ohour = document.getElementById("hour");
+  var ominute = document.getElementById("minute");
+  var osecond = document.getElementById("second");
+
+function setTime() {
+  var aDate = new Date();
+  var ms = aDate.getMilliseconds();
+  var s = aDate.getSeconds() + ms / 1000;
+  var m = aDate.getMinutes() + s / 60;
+  var h = aDate.getHours() % 12 + m / 60;
+  osecond.style.transform = "rotate(" + s*6 + "deg)";//秒针每秒转6度
+  osecond.style.webkitTransform = "rotate(" + s*6 + "deg)";
+  
+  ominute.style.transform = "rotate(" + m*6 + "deg)";//分针每分钟6度
+  ominute.style.webkitTransform = "rotate(" + m*6 + "deg)";
+  
+  ohour.style.transform = "rotate(" + h*30 + "deg)";//时针每小时30度
+  ohour.style.webkitTransform = "rotate(" + h*30 + "deg)";
+}
+setTime();
+setInterval(setTime,1000);
+</script>
+</html>

@@ -1,6 +1,7 @@
 #person img {
   width: 7rem;
   height: 7rem;
+  position: absolute;
 }
 
 .landAnimation {
@@ -79,61 +80,61 @@
   0% {
   }
   8.6% {
-    transform: translate(9rem,-2rem) rotate(-15deg);
+    transform: translateY(-2rem) rotate(-15deg);
   }
   18.6% {
-    transform: translate(17rem,2rem);
+    transform: translateY(2rem);
   }
   28% {
-    transform: translate(25rem,-2rem);
+    transform: translateY(-2rem);
   }
   38.6% {
-    transform: translate(33rem,2rem) rotate(8deg);
+    transform: translateY(2rem) rotate(8deg);
   }
   48% {
-    transform: translate(42rem,-2rem) rotate(-10deg);
+    transform: translateY(-2rem) rotate(-10deg);
   }
   58.6% {
-    transform: translate(52rem,2rem) rotate(6deg);
+    transform: translateY(2rem) rotate(6deg);
   }
   66.6% {
-    transform: translate(53rem,-2rem);
+    transform: translateY(-2rem);
   }
   80% {
-    transform: translate(60rem,-10rem) rotate(-15deg);
+    transform: translate(5rem,-12rem) rotate(-15deg);
   }
   100% {
-    transform: translate(71rem,2rem);
+    transform: translate(18rem,0rem);
   }
 }
 @keyframes surfing {
   0% {
   }
   8.6% {
-    transform: translate(9rem,-2rem) rotate(-15deg);
+    transform: translateY(-2rem) rotate(-15deg);
   }
   18.6% {
-    transform: translate(17rem,2rem);
+    transform: translateY(2rem);
   }
   28% {
-    transform: translate(25rem,-2rem);
+    transform: translateY(-2rem);
   }
   38.6% {
-    transform: translate(33rem,2rem) rotate(8deg);
+    transform: translateY(2rem) rotate(8deg);
   }
   48% {
-    transform: translate(42rem,-2rem) rotate(-10deg);
+    transform: translateY(-2rem) rotate(-10deg);
   }
   58.6% {
-    transform: translate(52rem,2rem) rotate(6deg);
+    transform: translateY(2rem) rotate(6deg);
   }
   66.6% {
-    transform: translate(53rem,-2rem);
+    transform: translateY(-2rem);
   }
   80% {
-    transform: translate(60rem,-10rem) rotate(-15deg);
+    transform: translate(5rem,-12rem) rotate(-15deg);
   }
   100% {
-    transform: translate(71rem,2rem);
+    transform: translate(18rem,0rem);
   }
 }

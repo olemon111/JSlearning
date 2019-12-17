@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-10 18:40:32
- * @LastEditTime: 2019-12-12 15:05:25
+ * @LastEditTime: 2019-12-16 01:19:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \task4\surf\js\index.js
@@ -12,6 +12,7 @@
   styleNode.innerHTML = "html{font-size:" + w + "px !important}";
   document.head.appendChild(styleNode);
 })()
+
 var oPerson = document.getElementById("person");
 var oBody = document.getElementById("body");
 var oContent = document.querySelector(".content");
@@ -29,10 +30,12 @@ function land(){
     document.getElementById("imgPerson").src="images/active/normal.gif";
   },2000);
 }
+
 function mask(){
   oMask.className = "functionmask";
   oInner.style.visibility="visible";
 }
+
 function surf(){
   mask();
   window.addEventListener("touchstart",function(){
@@ -43,6 +46,7 @@ function surf(){
     oPerson.style.webkitAnimationPlayState = 'running';
     oContent.style.webkitAnimationPlayState = 'running';
   });
+  
   window.addEventListener("touchend",function(){
     oContent.style.webkitAnimationPlayState = 'paused';
     oPerson.style.webkitAnimationPlayState = 'paused';
